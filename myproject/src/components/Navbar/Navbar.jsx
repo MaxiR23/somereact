@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import CardWidget from './CardWidget';
+import CardWidget from '../Body/CardWidget';
 
 const pages = ['Inicio', 'Ofertas', 'Contacto'];
 const settings = ['Perfil', 'Cuenta', 'Logout'];
