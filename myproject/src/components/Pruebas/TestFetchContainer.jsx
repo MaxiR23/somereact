@@ -1,25 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
-const array = [{
-    id: '1',
-    name: 'smartphone',
-    price: 150
-}]
+let arrayTest = [
+    {
+        name: "Maxi",
+        lastname: "Rebolo",
+        age: 26
+    }
+]
 
 export default function TestFetchContainer() {
-
-    const [testArray, setTestArray] = useState({})
-
     useEffect(() => {
-        fetch(array)
-        .then(response => response.json())
-        .then(data => setTestArray(data))
-        .catch(err => console.warn(err))
-    }, []);
-    
+        fetch(arrayTest)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+    }, [])
+
     return (
         <>
-        {testArray && <p> {testArray.name} </p>}
         </>
     )
 }

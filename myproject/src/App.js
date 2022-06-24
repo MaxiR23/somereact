@@ -2,7 +2,6 @@
 import './App.css';
 import NavBar from './components/Navbar/Navbar';
 import ItemListContainer from './components/Body/ItemListContainer';
-import TestFetchContainer from './components/Pruebas/TestFetchContainer';
 
 function App() {
 
@@ -13,7 +12,6 @@ function App() {
     <>
       <NavBar cardProducts={cardProducts} charUserName={charUserName}></NavBar>
       <ItemListContainer></ItemListContainer>
-      <TestFetchContainer></TestFetchContainer>
     </>
   );
 }
