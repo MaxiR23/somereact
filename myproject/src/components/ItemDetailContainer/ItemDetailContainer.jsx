@@ -32,10 +32,12 @@ const ItemDetailContainer = () => {
                 loading ?
                     <CircularProgress />
                     :
-                    <ItemDetail {...product}></ItemDetail>
+                    <ItemDetail product={product}></ItemDetail>
             }
         </div>
     )
 }
+
+{/* <ItemDetail {...product}></ItemDetail> otra forma de hacerlo */}
 
 export default ItemDetailContainer;

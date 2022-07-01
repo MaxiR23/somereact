@@ -1,4 +1,3 @@
-
 # PhoneUp
 
 Proyecto creado para la venta de celulares.
@@ -7,9 +6,10 @@ Proyecto creado para la venta de celulares.
 
 **Client:** React, Material UI
 
+## Demo
+
+<img src="https://i.ibb.co/2hZBdmZ/presentation.gif"> 
 
 ## Authors
 
 - [@maxir23](https://github.com/MaxiR23)
-
-https://i.ibb.co/2hZBdmZ/presentation.gif

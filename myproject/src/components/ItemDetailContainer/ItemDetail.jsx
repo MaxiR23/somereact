@@ -7,8 +7,15 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/system';
 import StarsIcon from '../Utils/StartsIcon';
 import { Box } from '@mui/material';
+import ItemCount from './ItemCount/ItemCount';
 
-const ItemDetail = ({ pictureUrl, brand, battery, camera, capacity, display, model, price, processor, ram, resolution, so, stars, stock }) => {
+const ItemDetail = ({ product }) => {
+    
+    function onAdd(count) {
+        product.quantity = count;
+        console.log(product)
+    }
+    
     return (
         <Container sx={
             {
@@ -25,8 +32,8 @@ const ItemDetail = ({ pictureUrl, brand, battery, camera, capacity, display, mod
                 component="img"
                 height="350"
                 width="290"
-                image={pictureUrl}
-                alt={brand + model}
+                image={product.pictureUrl}
+                alt={product.brand + product.model}
             />
             <Container sx={
                 {
@@ -36,43 +43,44 @@ const ItemDetail = ({ pictureUrl, brand, battery, camera, capacity, display, mod
 
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {brand} {model}
+                        {product.brand} {product.model}
                     </Typography>
                     <Box>
-                        <StarsIcon stars={stars}> </StarsIcon>
+                        <StarsIcon stars={product.stars}> </StarsIcon>
                     </Box>
                     <Typography variant='body1' color="GrayText">
-                        ${price.toFixed(3)}
+                        ${product.price.toFixed(3)}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Bateria: {battery.toFixed(3)}
+                        Bateria: {product.battery.toFixed(3)}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Camara: {camera}
+                        Camara: {product.camera}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Capacidad: {capacity} MB
+                        Capacidad: {product.capacity} MB
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Pantalla: {display}
+                        Pantalla: {product.display}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Procesador: {processor}
+                        Procesador: {product.processor}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Resolucion: {resolution}
+                        Resolucion: {product.resolution}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Ram: {ram} GB
+                        Ram: {product.ram} GB
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Sistema Operativo: {so}
+                        Sistema Operativo: {product.so}
                     </Typography>
                     <Typography variant='caption' color={'green'}>
-                        Stock disponible: {stock}
+                        Stock disponible: {product.stock}
                     </Typography>
                 </CardContent>
                 <CardActions sx={{display:'flex', justifyContent:'flex-end'}}>
+                    <ItemCount stock={product.stock} onAdd={onAdd}></ItemCount>
                     <Button size="small">Comprar ahora</Button>
                 </CardActions>
             </Container>
