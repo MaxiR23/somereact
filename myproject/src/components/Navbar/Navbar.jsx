@@ -13,24 +13,45 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CardWidget from './CardWidget';
+import { Link } from 'react-router-dom';
 
-const pages = ['Inicio', 'Ofertas', 'Contacto'];
-const settings = ['Perfil', 'Cuenta', 'Logout'];
 
-const ResponsiveAppBar = ({cardProducts, charUserName}) => {
+const ResponsiveAppBar = ({ cardProducts, charUserName }) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    
+    const settings = ['Perfil', 'Cuenta', 'Logout'];
+    
+    const pages = [
+        {
+            id: 1,
+            title: 'Inicio',
+            link: '/',
+            onclick: () => handleCloseNavMenu()
+        },
+        {
+            id: 2,
+            title: 'Apple',
+            link: 'category/Apple',
+            onclick: () => handleCloseNavMenu()
+        },
+        {
+            id: 3,
+            title: 'Samsung',
+            link: 'category/Samsung',
+            onclick: () => handleCloseNavMenu()
+        },
+    ]
 
-    /* esta función abre el menu cuando esta responsive */
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    /* esta funcion cierra dicho menu */
+
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    function handleCloseNavMenu() {
         setAnchorElNav(null);
     };
 
@@ -42,12 +63,13 @@ const ResponsiveAppBar = ({cardProducts, charUserName}) => {
         <AppBar position="static" style={{ backgroundColor: 'black' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <Link to='/' style={{color:'white'}}>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    </Link>
                     <Typography
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -60,7 +82,6 @@ const ResponsiveAppBar = ({cardProducts, charUserName}) => {
                     >
                         LOGO
                     </Typography>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -91,18 +112,22 @@ const ResponsiveAppBar = ({cardProducts, charUserName}) => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page.id} onClick={page.onclick}>
+                                    <Link to={page.link} style={{ color: 'black', textDecoration: 'none' }}>
+                                        <Typography textAlign="center">{page.title}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
+
+                    <Link to='/' style={{color:'white'}}>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    </Link>
                     <Typography
                         variant="h5"
                         noWrap
                         component="a"
-                        href=""
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -119,11 +144,13 @@ const ResponsiveAppBar = ({cardProducts, charUserName}) => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
+                                key={page.id}
+                                onClick={page.onclick}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
+                                <Link to={page.link} style={{ color: 'white', textDecoration: 'none' }}>
+                                    {page.title}
+                                </Link>
                             </Button>
                         ))}
                     </Box>
@@ -139,7 +166,7 @@ const ResponsiveAppBar = ({cardProducts, charUserName}) => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar sx={{bgcolor: '#757ce8'}}> {charUserName} </Avatar>
+                                <Avatar sx={{ bgcolor: '#757ce8' }}> {charUserName} </Avatar>
                             </IconButton>
                         </Tooltip>
                         <Menu

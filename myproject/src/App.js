@@ -1,9 +1,9 @@
 //@ts-check
 import './App.css';
 import NavBar from './components/Navbar/Navbar';
-import ItemListContainer from './components/Body/ItemListContainer';
-import TestFetchContainer from './components/Pruebas/TestFetchContainer';
-import ItemDetailContainer from './components/Body/ItemDetailContainer';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -11,12 +11,15 @@ function App() {
   const charUserName = 'M';
 
   return (
-    <>
+    <BrowserRouter>
       <NavBar cardProducts={cardProducts} charUserName={charUserName}></NavBar>
-      {/* <ItemListContainer></ItemListContainer>
-      <TestFetchContainer></TestFetchContainer> */}
-      <ItemDetailContainer></ItemDetailContainer>
-    </>
+      <Routes>
+        <Route path='/' element={<ItemListContainer />}></Route>
+        <Route path='/category/:idCategory' element={<ItemListContainer />}></Route>
+        <Route path='/item/:idItem' element={<ItemDetailContainer />}></Route>
+      </Routes>
+      {/* <ItemListContainer></ItemListContainer> */}
+    </BrowserRouter>
   );
 }
 
