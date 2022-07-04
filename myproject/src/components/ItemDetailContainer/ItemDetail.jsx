@@ -8,12 +8,13 @@ import { Container } from '@mui/system';
 import StarsIcon from '../Utils/StartsIcon';
 import { Box } from '@mui/material';
 import ItemCount from './ItemCount/ItemCount';
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ product }) => {
-    
+
     function onAdd(count) {
         product.quantity = count;
-        console.log(product)
+        console.log(product);
     }
     
     return (
@@ -81,7 +82,9 @@ const ItemDetail = ({ product }) => {
                 </CardContent>
                 <CardActions sx={{display:'flex', justifyContent:'flex-end'}}>
                     <ItemCount stock={product.stock} onAdd={onAdd}></ItemCount>
-                    <Button size="small">Comprar ahora</Button>
+                    <Button size="small">
+                    <Link to={'/cart'}> Finalizar Compra </Link>
+                    </Button>
                 </CardActions>
             </Container>
         </Container>
