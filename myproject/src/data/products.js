@@ -17,7 +17,7 @@ export const products = [
         resolution: 'FullHD+',
         so: 'iOS 15',
         stars: 5,
-        stock: 5
+        stock: 11
     },
     {
         id: 2,
@@ -57,7 +57,7 @@ export const products = [
         resolution: 'WQHD+',
         so: 'Android 11',
         stars: 5,
-        stock: 2
+        stock: 12
     },
     {
         id: 4,
@@ -77,6 +77,6 @@ export const products = [
         resolution: 'FullHD',
         so: 'iOS 14',
         stars: 5,
-        stock: 2
+        stock: 12
     },
 ]

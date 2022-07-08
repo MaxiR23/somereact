@@ -9,12 +9,14 @@ import StarsIcon from '../Utils/StartsIcon';
 import { Box } from '@mui/material';
 import ItemCount from './ItemCount/ItemCount';
 import { Link } from "react-router-dom";
+import { CartContext } from '../../context/CartContext';
 
 const ItemDetail = ({ product }) => {
 
+    const {addItem} = React.useContext(CartContext);
+
     function onAdd(count) {
-        product.quantity = count;
-        console.log(product);
+        addItem(product, count)
     }
     
     return (
