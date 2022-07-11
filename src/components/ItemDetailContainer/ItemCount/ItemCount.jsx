@@ -4,40 +4,45 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Container } from "@mui/system";
 import { Button, IconButton, Typography } from "@mui/material";
 
-export default function ItemCount({stock, onAdd}) {
+export default function ItemCount({ stock, onAdd, showButton, setShowButton }) {
 
     const [count, setCount] = useState(1);
 
     const add = () => {
         if (count < stock) {
+            console.log(stock)
             setCount(count + 1)
         }
-    } 
+    }
 
     const remove = () => {
         if (count > 1) {
+            console.log(stock)
             setCount(count - 1)
         }
     }
-    
+
     return (
         <>
-        <Container sx={{display:'flex', flexDirection:'row'}}>
-            <IconButton onClick={remove}>
-                <RemoveIcon/>
-            </IconButton>
-            <Typography sx={{margin: 2}}>
-                {count}
-            </Typography>
-            <IconButton onClick={add}>
-                <AddIcon/>
-            </IconButton>
-        </Container>
-        <Container>
-            <Button onClick={() => onAdd(count)}>
-                Agregar al carrito
-            </Button>
-        </Container>
+            <Container sx={{ display: 'flex', flexDirection: 'row' }}>
+                <IconButton onClick={remove}>
+                    <RemoveIcon />
+                </IconButton>
+                <Typography sx={{ margin: 2 }}>
+                    {count}
+                </Typography>
+                <IconButton onClick={add}>
+                    <AddIcon />
+                </IconButton>
+            </Container>
+            <div className={showButton ? 'disabled' : 'actived'}>
+                <Button onClick={() => {
+                    onAdd(count)
+                    setShowButton(true)
+                }}>
+                    Agregar al carrito
+                </Button>
+            </div>
         </>
     )
 }

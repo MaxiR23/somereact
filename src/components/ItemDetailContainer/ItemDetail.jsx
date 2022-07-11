@@ -10,15 +10,18 @@ import { Box } from '@mui/material';
 import ItemCount from './ItemCount/ItemCount';
 import { Link } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
+import { useState, useEffect } from 'react';
+import './ItemDetail.css'
 
 const ItemDetail = ({ product }) => {
 
-    const {addItem} = React.useContext(CartContext);
+    const { addItem } = React.useContext(CartContext);
+    const [showButton, setShowButton] = useState(false);
 
     function onAdd(count) {
         addItem(product, count)
     }
-    
+
     return (
         <Container sx={
             {
@@ -29,9 +32,9 @@ const ItemDetail = ({ product }) => {
             }
         }>
             <CardMedia
-            sx={{
-                width:320
-            }}
+                sx={{
+                    width: 320
+                }}
                 component="img"
                 height="350"
                 width="290"
@@ -82,11 +85,14 @@ const ItemDetail = ({ product }) => {
                         Stock disponible: {product.stock}
                     </Typography>
                 </CardContent>
-                <CardActions sx={{display:'flex', justifyContent:'flex-end'}}>
-                    <ItemCount stock={product.stock} onAdd={onAdd}></ItemCount>
-                    <Button size="small">
-                    <Link to={'/cart'}> Finalizar Compra </Link>
+                <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <ItemCount stock={product.stock} onAdd={onAdd} showButton={showButton} setShowButton={setShowButton} ></ItemCount>
+                    
+                    <div className={showButton ? 'actived' : 'disabled'}>
+                    <Button size="small" >
+                       <Link to={'/cart'} style={{ textDecoration: 'none' }}> Finalizar Compra </Link>
                     </Button>
+                    </div>
                 </CardActions>
             </Container>
         </Container>

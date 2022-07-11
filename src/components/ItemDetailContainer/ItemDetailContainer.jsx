@@ -38,6 +38,7 @@ const ItemDetailContainer = () => {
     )
 }
 
-{/* <ItemDetail {...product}></ItemDetail> otra forma de hacerlo */}
-
 export default ItemDetailContainer;
+
+// eslint-disable-next-line
+{/* <ItemDetail {...product}></ItemDetail> otra forma de hacerlo */}  
