@@ -16,7 +16,7 @@ import CardWidget from './CardWidget';
 import { Link } from 'react-router-dom';
 
 
-const ResponsiveAppBar = ({ cardProducts, charUserName }) => {
+const ResponsiveAppBar = ({ charUserName }) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     
@@ -160,7 +160,7 @@ const ResponsiveAppBar = ({ cardProducts, charUserName }) => {
                         display: 'flex',
                         flexDirection: 'row'
                     }}>
-                        <CardWidget cardProducts={cardProducts}></CardWidget>
+                        <CardWidget></CardWidget>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

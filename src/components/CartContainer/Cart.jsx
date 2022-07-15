@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Button } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Cart = () => {
 
@@ -37,9 +38,10 @@ const Cart = () => {
                             <TableCell align="right"> {row.model} </TableCell>
                             <TableCell align="right">$ {row.price.toFixed(3)} </TableCell>
                             <TableCell align="right"> {row.quantity} </TableCell>
-                            <TableCell align="right">$ {Math.trunc(row.price) * row.quantity} </TableCell>
+                            <TableCell align="right">$ {row.quantity * row.price.toFixed(3)}  </TableCell>
                             <TableCell align="right">
-                                <Button onClick={() => removeItem()}>
+                                <Button onClick={() => removeItem(row.id)}>
+                                    <ClearIcon> </ClearIcon>
                                     Borrar
                                 </Button>
                             </TableCell>

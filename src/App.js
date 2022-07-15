@@ -8,13 +8,12 @@ import Cart from './components/CartContainer/Cart';
 
 function App() {
 
-  const cardProducts = 10;
   const charUserName = 'M';
 
   return (
     <CartProvider>
     <BrowserRouter>
-      <NavBar cardProducts={cardProducts} charUserName={charUserName}></NavBar>
+      <NavBar charUserName={charUserName}></NavBar>
       <Routes>
         <Route path='/' element={<ItemListContainer />}></Route>
         <Route path='/category/:idCategory' element={<ItemListContainer />}></Route>
