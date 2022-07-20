@@ -1,39 +1,34 @@
-import { CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import { products } from "../../data/products";
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import { CircularProgress } from "@mui/material";
 
 const ItemDetailContainer = () => {
 
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState({});
-    let {idItem} = useParams() 
+    let { idItem } = useParams()
 
     useEffect(() => {
-        let task = new Promise((res, rej) => {
-            setTimeout(() => {
-                res(products)
-            }, 2000);
-        });
+        const db = getFirestore();
 
-        task
-            .then(response => {
-                const item = response.find((item) => item.id === Number(idItem));
-                setProduct(item)
-            })
+        const itemRef = doc(db, 'items', idItem);
+        getDoc(itemRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                setProduct({ id: snapshot.id, ...snapshot.data() })
+            }
+        })
             .catch(err => console.warn(err))
             .finally(() => setLoading(false))
     }, [idItem])
 
     return (
         <div>
-            {
-                loading ?
-                    <CircularProgress />
-                    :
-                    <ItemDetail product={product}></ItemDetail>
-            }
+            {loading ?
+            <CircularProgress />
+            :
+            <ItemDetail product={product}></ItemDetail>}
         </div>
     )
 }
@@ -41,4 +36,4 @@ const ItemDetailContainer = () => {
 export default ItemDetailContainer;
 
 // eslint-disable-next-line
-{/* <ItemDetail {...product}></ItemDetail> otra forma de hacerlo */}  
+{/* <ItemDetail {...product}></ItemDetail> otra forma de hacerlo */ }  

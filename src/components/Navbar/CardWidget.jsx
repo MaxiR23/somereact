@@ -1,19 +1,22 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Box from '@mui/material/Box';
+import { Badge, IconButton } from '@mui/material';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const CardWidget = () => {
 
-    const {cart} = useContext(CartContext);
+    const { cart } = useContext(CartContext);
 
     return (
         <>
-        <AddShoppingCartIcon/>
-        <Box sx={{mx: 0.5}}>
-        {cart.length}
-        </Box>
+        <IconButton sx={{marginTop: 1}} style={{ color: 'white' }} aria-label={`show ${cart.length} notifications`}>
+            <Badge badgeContent={cart.length} color={'error'}>
+                <Link to={'/cart'} style={{color:'white'}}>
+                <AddShoppingCartIcon/>
+                </Link>
+            </Badge>
+        </IconButton>
         </>
     )
 };

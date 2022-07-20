@@ -10,10 +10,11 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Button } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    const { cart, removeItem } = useContext(CartContext);
+    const { cart, clear, removeItem } = useContext(CartContext);
 
     return (
         <TableContainer component={Paper}>
@@ -25,7 +26,9 @@ const Cart = () => {
                         <TableCell align="right">Precio</TableCell>
                         <TableCell align="right">Cantidad</TableCell>
                         <TableCell align="right">Precio Total</TableCell>
-                        <TableCell align="right">Eliminar Producto</TableCell>
+                        <TableCell align="right">Finalizar</TableCell>
+                        <TableCell align="right">Eliminar Prod</TableCell>
+                        <TableCell align="right">Eliminar Todo</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -36,13 +39,25 @@ const Cart = () => {
                         >
                             <TableCell component="th" scope="row"> {row.brand} </TableCell>
                             <TableCell align="right"> {row.model} </TableCell>
-                            <TableCell align="right">$ {row.price.toFixed(3)} </TableCell>
+                            <TableCell align="right">$ {row.price} </TableCell>
                             <TableCell align="right"> {row.quantity} </TableCell>
-                            <TableCell align="right">$ {row.quantity * row.price.toFixed(3)}  </TableCell>
+                            <TableCell align="right">$ {row.quantity * row.price}  </TableCell>
+                            <TableCell align="right">
+                                <Button>
+                                    <Link to={'/checkout'}>
+                                    Comprar
+                                    </Link>
+                                </Button>
+                            </TableCell>
                             <TableCell align="right">
                                 <Button onClick={() => removeItem(row.id)}>
                                     <ClearIcon> </ClearIcon>
                                     Borrar
+                                </Button>
+                            </TableCell>
+                            <TableCell align='right'>
+                                <Button onClick={() => clear()}>
+                                    Borrar Todo
                                 </Button>
                             </TableCell>
                         </TableRow>

@@ -10,7 +10,8 @@ const ItemList = ({ items }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'center',
-                gap: 2
+                gap: 2,
+                flexWrap: 'wrap'
             }}>
 
                 {items.map((item) => (

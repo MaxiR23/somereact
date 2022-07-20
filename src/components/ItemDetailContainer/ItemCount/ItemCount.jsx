@@ -4,7 +4,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Container } from "@mui/system";
 import { Button, IconButton, Typography } from "@mui/material";
 
-export default function ItemCount({ stock, onAdd, showButton, setShowButton }) {
+export default function ItemCount({ stock, onAdd, setShowButton }) {
 
     const [count, setCount] = useState(1);
 
@@ -35,14 +35,12 @@ export default function ItemCount({ stock, onAdd, showButton, setShowButton }) {
                     <AddIcon />
                 </IconButton>
             </Container>
-            <div className={showButton ? 'disabled' : 'actived'}>
-                <Button onClick={() => {
-                    onAdd(count)
-                    setShowButton(true)
-                }}>
-                    Agregar al carrito
-                </Button>
-            </div>
+            <Button onClick={() => {
+                onAdd(count)
+                setShowButton(false)
+            }}>
+                Agregar al carrito
+            </Button>
         </>
     )
 }

@@ -3,7 +3,7 @@ import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
-import { products } from "../../data/products";
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 
 const ItemListContainer = () => {
 
@@ -13,23 +13,29 @@ const ItemListContainer = () => {
     
     useEffect(() => {
 
-        let task = new Promise((res, rej) => {
-            setTimeout(() => {
-                res(products);
-            }, 2000);
-        });
+        const db = getFirestore();
 
-        task
-            .then((response) => {
-                if (!idCategory) {
-                    setItems(response)
-                } else {
-                    const arrayFiltered = response.filter((item) => item.brand === idCategory);
-                    setItems(arrayFiltered)
-                }
-            }, [idCategory])
-            .catch((err) => console.warn(err))
-            .finally(() => setLoading(false));
+        const itemsRef = collection(db, 'items'); 
+        getDocs(itemsRef)
+        .then((snapshot) => {
+            if (!idCategory) {
+                setItems(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+            } else {
+                const itemRef = query(
+                    collection(db, 'items'), 
+                    where('idCategory', '==', idCategory)
+                );
+
+                getDocs(itemRef).then((snapshot) => {
+                    if (snapshot.size === 0) {
+                        console.warn('no results')
+                    }
+                    setItems(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()}))); 
+                }) 
+            }
+        })
+        .catch((err) => console.warn(err))
+        .finally(setLoading(false));
     }, [idCategory])
 
     return (
@@ -42,7 +48,7 @@ const ItemListContainer = () => {
         }}>
             {loading && <CircularProgress />}
         </Container>
-
+        <img src="https://i.ibb.co/HN3fy14/sneakers-landscape-banner.png" alt="banner-img" width='100%' height='auto' />
             <ItemList items={items}></ItemList>
         </>
     )

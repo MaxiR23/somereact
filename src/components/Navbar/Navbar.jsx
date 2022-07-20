@@ -31,14 +31,14 @@ const ResponsiveAppBar = ({ charUserName }) => {
         },
         {
             id: 2,
-            title: 'Apple',
-            link: 'category/Apple',
+            title: 'Hoodies',
+            link: 'category/Hoodies',
             onclick: () => handleCloseNavMenu()
         },
         {
             id: 3,
-            title: 'Samsung',
-            link: 'category/Samsung',
+            title: 'Zapatillas',
+            link: 'category/Zapatillas',
             onclick: () => handleCloseNavMenu()
         },
     ]

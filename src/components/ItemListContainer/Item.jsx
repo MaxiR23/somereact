@@ -6,31 +6,26 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import { Box } from '@mui/system';
-import StarsIcon from '../Utils/StartsIcon';
 
 export default function Item({ item }) {
     return (
-        <Card sx={{ maxWidth: 350 }}>
+        <Card sx={{ maxWidth: 320 }}>
             <CardMedia
                 component="img"
-                alt={item.brand + ' ' + item.model}
+                alt={item.brand}
                 height="300"
                 width="150"
-                image={item.pictureUrl}
+                image={item.image}
             />
             <CardContent>
-                <Box sx={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
-                    <StarsIcon stars={item.stars}></StarsIcon>
-                </Box>
                 <Typography textAlign={'center'} gutterBottom variant="h5" component="div">
                     {item.brand}
                 </Typography>
                 <Typography textAlign={'center'} variant="body2" color="text.secondary">
                        Modelo: {item.model}
                     </Typography>
-                <Typography textAlign={'center'} variant="body2" color="text.secondary">
-                    {'$' + item.price.toFixed(3)}
+                <Typography textAlign={'center'} variant="body2" color={'#4caf50'}>
+                    {'$' + item.price}
                 </Typography>
             </CardContent>
             <CardActions sx={{

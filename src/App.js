@@ -5,6 +5,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Cart from './components/CartContainer/Cart';
+import CheckOut from './components/Firebase/CheckOut';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
         <Route path='/category/:idCategory' element={<ItemListContainer />}></Route>
         <Route path='/item/:idItem' element={<ItemDetailContainer />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
+        {/* test */}
+        <Route path='/checkout' element={<CheckOut />}></Route>
       </Routes>
     </BrowserRouter>
     </CartProvider>
