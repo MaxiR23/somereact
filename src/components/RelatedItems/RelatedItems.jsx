@@ -10,11 +10,13 @@ import { Link } from 'react-router-dom';
 export default function RelatedItems({ idCategory }) {
 
     const [relatedProducts, setRelatedProducts] = React.useState([]);
+
     React.useEffect(() => {
         const db = getFirestore();
         const itemRef = query(
             collection(db, 'items'),
-            where('idCategory', '==', idCategory), limit(4))
+            where('idCategory', '==', idCategory), limit(4));
+
         getDocs(itemRef).then((snapshot) => {
             if (snapshot.size === 0) {
                 console.warn('No results')
@@ -50,9 +52,9 @@ export default function RelatedItems({ idCategory }) {
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions sx={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
+                        <CardActions sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                             <Button size="small" color="primary">
-                            <Link to={`/item/${e.id}`} style={{color:'#0077b6', textDecoration:'none'}}> Ver detalle del producto </Link>
+                                <Link to={`/item/${e.id}`} style={{ color: '#0077b6', textDecoration: 'none' }}> Ver detalle del producto </Link>
                             </Button>
                         </CardActions>
                     </Card>

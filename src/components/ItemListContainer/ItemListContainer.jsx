@@ -4,13 +4,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const ItemListContainer = () => {
 
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     let {idCategory} = useParams();
-    
+    const {user} = useContext(AuthContext);
+
+/*     console.log(user);
+ */
     useEffect(() => {
 
         const db = getFirestore();
@@ -48,7 +53,6 @@ const ItemListContainer = () => {
         }}>
             {loading && <CircularProgress />}
         </Container>
-        <img src="https://i.ibb.co/HN3fy14/sneakers-landscape-banner.png" alt="banner-img" width='100%' height='auto' />
             <ItemList items={items}></ItemList>
         </>
     )

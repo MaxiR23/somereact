@@ -5,14 +5,16 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
+    console.log(cart)
+
     const isInCart = (id) => {
-        return cart.some(element => element.id === Number(id));
+        return cart.some(element => element.id === id);
     };
     
     function addItem(item, quantity) {
         if (isInCart(item.id)) {
             let newCart = cart;
-            let indexProduct = newCart.findIndex(element => element.id === Number(item.id));
+            let indexProduct = newCart.findIndex(element => element.id === item.id);
             newCart[indexProduct].quantity = Number(newCart[indexProduct].quantity) + Number(quantity);
             setCart([...newCart]);
         } else {
@@ -21,7 +23,7 @@ export const CartProvider = ({ children }) => {
     }
 
     function removeItem(itemId) {
-        setCart(cart.filter(element => element.id !== itemId));
+        setCart(cart.find(element => element.id === itemId));
     }
 
     const clear = () => {

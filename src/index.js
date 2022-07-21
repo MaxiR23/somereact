@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {initializeApp} from 'firebase/app'
+import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCKQw5GnenPbZSsqH6z6kVbLYwN_qGz6lU",
@@ -15,7 +16,8 @@ const firebaseConfig = {
     measurementId: "G-F65S6EYP3D"
 };
   
-initializeApp(firebaseConfig);
+export const app  = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

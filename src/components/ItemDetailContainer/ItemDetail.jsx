@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from '../../context/CartContext';
 import { useState } from 'react';
 import './ItemDetail.css'
-import RelatedItems from './RelatedItems';
+import RelatedItems from '../RelatedItems/RelatedItems';
 
 const ItemDetail = ({ product }) => {
 

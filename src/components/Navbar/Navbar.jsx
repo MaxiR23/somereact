@@ -13,14 +13,27 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CardWidget from './CardWidget';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const ResponsiveAppBar = ({ charUserName }) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    
-    const settings = ['Perfil', 'Cuenta', 'Logout'];
+    const {user, logout} = React.useContext(AuthContext); 
+    const navigate = useNavigate();
+
+    const settings = [
+        {
+            id: 1,
+            title: 'Ingresar',
+            link: '/login', 
+        },
+        {
+            id: 2,
+            title: 'Registrarse',
+            link: '/register', 
+        },
+    ];
     
     const pages = [
         {
@@ -58,6 +71,11 @@ const ResponsiveAppBar = ({ charUserName }) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleLogout = async () => {
+        await logout()
+        navigate('/')
+    }
 
     return (
         <AppBar position="static" style={{ backgroundColor: 'black' }}>
@@ -185,11 +203,18 @@ const ResponsiveAppBar = ({ charUserName }) => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            {user === null ? 
+                            settings.map((setting, i) => (
+                                <MenuItem key={i} onClick={handleCloseUserMenu}>
+                                    <Link to={setting.link} style={{ color: 'black', textDecoration: 'none' }}>
+                                        <Typography textAlign="center">{setting.title}</Typography>
+                                    </Link>
                                 </MenuItem>
-                            ))}
+                            )) :
+                            <MenuItem onClick={handleLogout}>
+                                Cerrar Session 
+                            </MenuItem>
+                            }
                         </Menu>
                     </Box>
                 </Toolbar>
