@@ -62,7 +62,7 @@ const ItemDetail = ({ product }) => {
                 </CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {showButton ? 
-                    <ItemCount stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} ></ItemCount>
+                    <ItemCount initial={1} stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} ></ItemCount>
                         :
                         <Button size="small" >
                             <Link to={'/cart'} style={{color:'#0077b6', textDecoration:'none'}}> Finalizar Compra </Link>

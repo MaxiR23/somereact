@@ -4,9 +4,9 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Container } from "@mui/system";
 import { Button, IconButton, Typography } from "@mui/material";
 
-export default function ItemCount({ stock, onAdd, setShowButton }) {
+export default function ItemCount({ initial, stock, onAdd, setShowButton }) {
 
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(initial);
     
     const add = () => {
         if (count < stock) {

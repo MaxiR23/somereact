@@ -70,4 +70,4 @@ export default function RelatedItems({ idCategory, model }) {
     )
 }
 /* Realizo esto ya que al cambiar de items aparece uno nuevo! */
-export const relatedItemsMemo = React.memo(RelatedItems)
+/* export const relatedItemsMemo = React.memo(RelatedItems); */ 
