@@ -77,6 +77,8 @@ const ResponsiveAppBar = ({ charUserName }) => {
         navigate('/')
     }
 
+    user === null ? charUserName = ':)' : charUserName = user.email.charAt(0);    
+    
     return (
         <AppBar position="static" style={{ backgroundColor: 'black' }}>
             <Container maxWidth="xl">
@@ -184,7 +186,7 @@ const ResponsiveAppBar = ({ charUserName }) => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar sx={{ bgcolor: '#757ce8' }}> {charUserName} </Avatar>
+                                <Avatar sx={{ bgcolor: '#757ce8' }}> {charUserName.toUpperCase()} </Avatar>
                             </IconButton>
                         </Tooltip>
                         <Menu

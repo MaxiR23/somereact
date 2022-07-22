@@ -80,7 +80,7 @@ const ItemDetail = ({ product }) => {
             flexWrap: 'wrap',
             gap: 2
         }}>
-            <RelatedItems idCategory={product.idCategory}></RelatedItems>
+            <RelatedItems idCategory={product.idCategory} model={product.model}></RelatedItems>
         </Container>
     </>
 }

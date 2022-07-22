@@ -7,14 +7,14 @@ import { Button, IconButton, Typography } from "@mui/material";
 export default function ItemCount({ stock, onAdd, setShowButton }) {
 
     const [count, setCount] = useState(1);
-
+    
     const add = () => {
         if (count < stock) {
             console.log(stock)
             setCount(count + 1)
         }
     }
-
+    
     const remove = () => {
         if (count > 1) {
             console.log(stock)
