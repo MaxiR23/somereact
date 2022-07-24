@@ -16,10 +16,9 @@ const ItemDetail = ({ product }) => {
 
     const { addItem } = React.useContext(CartContext);
     const [showButton, setShowButton] = useState(true);
-
-    function onAdd(count) {
-        addItem(product, count);
-    }
+    const [count, setCount] = useState(1) 
+    
+    const onAdd = count => addItem(product, count);
 
     return <>
         <Container sx={
@@ -62,7 +61,7 @@ const ItemDetail = ({ product }) => {
                 </CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {showButton ? 
-                    <ItemCount initial={1} stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} ></ItemCount>
+                    <ItemCount count={count} setCount={setCount} stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} ></ItemCount>
                         :
                         <Button size="small" >
                             <Link to={'/cart'} style={{color:'#0077b6', textDecoration:'none'}}> Finalizar Compra </Link>
@@ -80,7 +79,7 @@ const ItemDetail = ({ product }) => {
             flexWrap: 'wrap',
             gap: 2
         }}>
-            <RelatedItems idCategory={product.idCategory} model={product.model}></RelatedItems>
+            <RelatedItems idCategory={product.idCategory} model={product.model} setCount={setCount} count={count}></RelatedItems>
         </Container>
     </>
 }

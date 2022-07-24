@@ -14,7 +14,9 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    const { cart, clear, removeItem } = useContext(CartContext);
+    const { cart, clear, removeItem, quantity, total } = useContext(CartContext);
+    console.log(total)
+    console.log(quantity)
 
     return (
         <TableContainer component={Paper}>
@@ -31,11 +33,14 @@ const Cart = () => {
                         <TableCell align="right">Eliminar Todo</TableCell>
                     </TableRow>
                 </TableHead>
+                {cart.length < 1 ? 
+                <p> No tienes productos agregados </p>
+                :
                 <TableBody>
                     {cart.map((row) => (
                         <TableRow
-                            key={row.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        key={row.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row"> {row.brand} </TableCell>
                             <TableCell align="right"> {row.model} </TableCell>
@@ -63,6 +68,7 @@ const Cart = () => {
                         </TableRow>
                     ))}
                 </TableBody>
+             }
             </Table>
         </TableContainer>
     )

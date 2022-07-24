@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export default function RelatedItems({ idCategory, model }) {
+const RelatedItems = ({ idCategory, model, setCount, count }) => {
 
     const [relatedProducts, setRelatedProducts] = React.useState([]);
 
@@ -56,7 +56,7 @@ export default function RelatedItems({ idCategory, model }) {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" onClick={() => setCount( count = 1 )}>
                                     <Link to={`/item/${e.id}`} style={{ color: '#0077b6', textDecoration: 'none' }}> Ver detalle del producto </Link>
                                 </Button>
                             </CardActions>
@@ -70,4 +70,4 @@ export default function RelatedItems({ idCategory, model }) {
     )
 }
 /* Realizo esto ya que al cambiar de items aparece uno nuevo! */
-/* export const relatedItemsMemo = React.memo(RelatedItems); */ 
+export default React.memo(RelatedItems)

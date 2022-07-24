@@ -12,15 +12,12 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         const db = getFirestore();
-
         const itemRef = doc(db, 'items', idItem);
-        getDoc(itemRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                setProduct({ id: snapshot.id, ...snapshot.data() })
-            }
-        })
-            .catch(err => console.warn(err))
-            .finally(() => setLoading(false))
+
+        getDoc(itemRef).then((snapshot) => {if (snapshot.exists()) {setProduct({ id: snapshot.id, ...snapshot.data() })}})
+        .catch(err => console.warn(err))
+        .finally(() => setLoading(false))
+
     }, [idItem])
 
     return (

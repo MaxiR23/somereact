@@ -26,7 +26,7 @@ function App() {
             <Route path='/item/:idItem' element={<ItemDetailContainer />}></Route>
             <Route path='/cart' element={<ProtectedRoute> <Cart /> </ProtectedRoute>}></Route>
             {/* test */}
-            <Route path='/checkout' element={<CheckOut />}></Route>
+            <Route path='/checkout' element={<ProtectedRoute> <CheckOut /> </ProtectedRoute>}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
           </Routes>

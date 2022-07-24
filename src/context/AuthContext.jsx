@@ -22,10 +22,13 @@ export const AuthProvider = ({children}) => {
     /* const emailVerification = () => sendEmailVerification(auth.currentUser).then(() => alert('send')).catch(e => alert(e.message)) */
 
     useEffect(() => {
-        onAuthStateChanged(auth, currentUser => {
+        const authSuscribe = onAuthStateChanged(auth, currentUser => {
           setUser(currentUser)
           setLoading(false)
-        })
+        });
+
+        return authSuscribe;
+        
     }, [])
 
     return (

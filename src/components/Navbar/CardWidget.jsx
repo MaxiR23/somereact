@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 
 const CardWidget = () => {
 
-    const { cart } = useContext(CartContext);
+    const { quantity } = useContext(CartContext);
 
     return (
         <>
-        <IconButton sx={{marginTop: 1}} style={{ color: 'white' }} aria-label={`show ${cart.length} notifications`}>
-            <Badge badgeContent={cart.length} color={'error'}>
+        <IconButton sx={{marginTop: 1}} style={{ color: 'white' }} aria-label={`show ${quantity} notifications`}>
+            <Badge badgeContent={quantity} color={'error'}>
                 <Link to={'/cart'} style={{color:'white'}}>
                 <AddShoppingCartIcon/>
                 </Link>

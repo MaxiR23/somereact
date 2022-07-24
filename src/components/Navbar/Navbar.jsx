@@ -56,22 +56,12 @@ const ResponsiveAppBar = ({ charUserName }) => {
         },
     ]
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
+    const handleOpenNavMenu = event => setAnchorElNav(event.currentTarget);
+    const handleOpenUserMenu = event => setAnchorElUser(event.currentTarget);
 
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    function handleCloseNavMenu() {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
+    function handleCloseNavMenu() { setAnchorElNav(null) };
+    const handleCloseUserMenu = () => setAnchorElUser(null); 
+    
     const handleLogout = async () => {
         await logout()
         navigate('/')
