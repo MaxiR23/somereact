@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function CheckOut() {
 
+  const navigate = useNavigate();
+
   const {user} = React.useContext(AuthContext);
-  const {cart, total} = React.useContext(CartContext)
+  const {cart, clear, total} = React.useContext(CartContext)
 
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
@@ -30,6 +33,9 @@ export default function CheckOut() {
 
     try {
       await addDoc(docRef, order).then((id) => console.log(id)) 
+        alert('Muchas gracias por haber realizado una compra en nuestra website');
+        navigate('/')
+        clear();
     } catch (error) {
       console.warn(error.message)      
     }
