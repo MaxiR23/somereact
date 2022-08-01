@@ -15,9 +15,7 @@ import { Container } from '@mui/system';
 
 const Cart = () => {
 
-    const { cart, clear, removeItem, quantity, total } = useContext(CartContext);
-    console.log(total)
-    console.log(quantity)
+    const { cart, clear, removeItem, total } = useContext(CartContext);
 
     return (
         <>
@@ -48,9 +46,9 @@ const Cart = () => {
                                 >
                                     <TableCell component="th" scope="row"> {row.brand} </TableCell>
                                     <TableCell align="right"> {row.model} </TableCell>
-                                    <TableCell align="right">$ {row.price} </TableCell>
+                                    <TableCell align="right"> {'$'+row.price} </TableCell>
                                     <TableCell align="right"> {row.quantity} </TableCell>
-                                    <TableCell align="right">$ {row.quantity * row.price}  </TableCell>
+                                    <TableCell align="right"> {'$'+row.quantity * row.price}  </TableCell>
                                     <TableCell align="right">
                                         <Button>
                                             <Link to={'/checkout'}>
@@ -75,7 +73,7 @@ const Cart = () => {
                             <TableRow>
                                 <TableCell rowSpan={3} />
                                 <TableCell colSpan={2}>Total</TableCell>
-                                <TableCell align="right">{total}</TableCell>
+                                <TableCell align="right">{'$'+total}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

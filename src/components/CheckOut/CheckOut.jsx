@@ -1,5 +1,5 @@
 import React from 'react'
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -40,11 +40,24 @@ export default function CheckOut() {
     if (!userEmail) return;
     
     const db = getFirestore();
-    const docRef = collection(db, 'orders') 
-
+    const docRef = collection(db, 'orders')  
+    
     try {
       await addDoc(docRef, order).then((id) => console.log(id)) 
-        alert('Muchas gracias por haber realizado una compra en nuestra website');
+
+      try {
+        for (const key of cart) {
+          const docReff = doc(db, 'items', key.id)
+          const aux = key.stock - key.quantity;
+          updateDoc(docReff, {stock: Number(aux)})
+          console.log('actualizado')
+        }   
+      } catch (error) {
+        console.warn(error.message)
+        throw error;
+      }
+
+      alert('Muchas gracias por haber realizado una compra en nuestra website');
         navigate('/')
         clear();
     } catch (error) {

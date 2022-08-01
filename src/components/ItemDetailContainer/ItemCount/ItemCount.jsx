@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Container } from "@mui/system";
 import { Button, IconButton, Typography } from "@mui/material";
-import { useCallback } from "react";
 
 export default function ItemCount({ count, setCount, stock, onAdd, setShowButton }) {
 
@@ -16,8 +15,6 @@ export default function ItemCount({ count, setCount, stock, onAdd, setShowButton
         if (count > 1) {
             setCount(count - 1)
         }}
-
-    console.log('renderizado itemDetail')
 
     return (
         <>
