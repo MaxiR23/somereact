@@ -50,18 +50,16 @@ export default function CheckOut() {
           const docReff = doc(db, 'items', key.id)
           const aux = key.stock - key.quantity;
           updateDoc(docReff, {stock: Number(aux)})
-          console.log('actualizado')
         }   
       } catch (error) {
-        console.warn(error.message)
-        throw error;
+        console.warn('Update error:', error.message)
       }
 
       alert('Muchas gracias por haber realizado una compra en nuestra website');
         navigate('/')
         clear();
     } catch (error) {
-      console.warn(error.message)      
+      console.warn('Adding order error:', error.message)      
     }
   }
 
