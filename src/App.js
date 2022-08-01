@@ -11,15 +11,15 @@ import Login from './components/Firebase/Login';
 import { AuthProvider } from './context/AuthContext';
 import Register from './components/Firebase/Register';
 import ProtectedRoute from './components/Firebase/ProtectedRoute';
+import ResetPassword from './components/Firebase/ResetPassword';
 
 function App() {
 
-  const charUserName = 'M';
   return (
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
-          <NavBar charUserName={charUserName}></NavBar>
+          <NavBar></NavBar>
           <Routes>
             <Route path='/' element={<> <Banner /> <ItemListContainer /> </>}></Route>
             <Route path='/category/:idCategory' element={<ItemListContainer />}></Route>
@@ -29,6 +29,7 @@ function App() {
             <Route path='/checkout' element={<ProtectedRoute> <CheckOut /> </ProtectedRoute>}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
+            <Route path='/resetPassword' element={<ResetPassword />}></Route>
           </Routes>
         </BrowserRouter>
       </CartProvider>

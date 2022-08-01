@@ -16,11 +16,12 @@ import CardWidget from './CardWidget';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
-const ResponsiveAppBar = ({ charUserName }) => {
+const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const {user, logout} = React.useContext(AuthContext); 
     const navigate = useNavigate();
+    let charUserName;
 
     const settings = [
         {
