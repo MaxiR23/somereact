@@ -12,14 +12,19 @@ export default function Register() {
 
   const [emailTypingError, setEmailTypingError] = React.useState();
   const [passwordTypingError, setPasswordTypingError] = React.useState();
+  const [userNameTypingError, setUserNameTypingError] = React.useState();
+  const [lastNameTypingError, setLastNameTypingError] = React.useState();
 
   const [error, setError] = React.useState();
-  const {signUp} = React.useContext(AuthContext);
+  const {signUp, updateUserDetail} = React.useContext(AuthContext);
+  
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: '',
-    password: '',
+    name:'',
+    lastname:'',
+    password: ''
   })
 
   /* Actualiza el estado */                         /* copio todos los datos que tenga y voy a actualizar */
@@ -28,21 +33,34 @@ export default function Register() {
   /* Para ver que es lo que tiene */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user.email && !user.password) {
+    if (!user.email && !user.password && !user.name && !user.lastname) {
       setEmailTypingError('Inserte un correo electrónico valido.')
       setPasswordTypingError('Ingrese una contraseña valida.')
+      setUserNameTypingError('Ingrese su nombre.')
+      setLastNameTypingError('Ingrese su apellido.')
     } else if (!user.email) {
       setEmailTypingError('Ingrese un correo electrónico valido.')
     } else if (!user.password) {
       setPasswordTypingError('Ingrese una contraseña valida.')
+    } else if (!user.name) {
+      setUserNameTypingError('Ingrese su nombre.')
+    } else if (!user.lastname) {
+      setLastNameTypingError('Ingrese su apellido.')
     } else {
       setEmailTypingError('')
       setPasswordTypingError('')
     }
-    
+  
     setError('')
     try {
       await signUp(user.email, user.password);
+      try {
+        const displayName = user.name + ' ' + user.lastname
+        updateUserDetail(displayName);
+        console.log('agregado:', displayName)
+      } catch (error) {
+        console.warn(error.message)
+      }      
       navigate('/')
     } catch (error) {
       if (error.code === 'auth/weak-password') {
@@ -81,25 +99,59 @@ export default function Register() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
+                {userNameTypingError ? 
+                <>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                required
+                error
+                fullWidth
+                id="firstName"
+                name="name"
+                label="Nombre"
+                autoComplete="given-name"
+                onChange={handleChanges}
+              />
+              <Typography textAlign={'end'} style={{color:'red'}}> {userNameTypingError} </Typography>
+                </>
+                :
+                <TextField
                   required
                   fullWidth
-                  id="firstName"
-                  label="Nombre"
                   autoFocus
+                  id="firstName"
+                  name="name"
+                  label="Nombre"
+                  autoComplete="given-name"
+                  onChange={handleChanges}
                 />
+                }
               </Grid>
               <Grid item xs={12} sm={6}>
+                {lastNameTypingError ?
+                <>
+                <TextField
+                required
+                error
+                fullWidth
+                id="lastName"
+                name="lastname"
+                label="Apellido"
+                autoComplete="family-name"
+                onChange={handleChanges}
+              />
+              <Typography textAlign={'end'} style={{color:'red'}}> {lastNameTypingError} </Typography>
+                </>
+                :
                 <TextField
                   required
                   fullWidth
                   id="lastName"
+                  name="lastname"
                   label="Apellido"
-                  name="lastName"
                   autoComplete="family-name"
+                  onChange={handleChanges} 
                 />
+                }
               </Grid>
               <Grid item xs={12}>
                 {emailTypingError ? 
@@ -109,8 +161,8 @@ export default function Register() {
                 error
                 fullWidth
                 id="email"
-                label="Correo electrónico"
                 name="email"
+                label="Correo electrónico"
                 autoComplete="email"
                 onChange={handleChanges}
               />

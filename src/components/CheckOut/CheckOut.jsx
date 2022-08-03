@@ -16,8 +16,12 @@ export default function CheckOut() {
   const {user} = React.useContext(AuthContext);
   const {cart, clear, total} = React.useContext(CartContext)
 
-  const name = 'Maxi';
-  const lastName = 'Rebolo';
+  console.log(user.displayName);
+  const newDisplayName = user.displayName.split(' ')
+  console.log(typeof newDisplayName[0])
+
+  const name = newDisplayName[0];
+  const lastName = newDisplayName[1]
   const userEmail = user.email;
 
   const address = ['Av Camino del Peru', 'Yerba Buena', 'Tucuman', 'Argentina'];

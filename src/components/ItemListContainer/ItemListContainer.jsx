@@ -37,7 +37,10 @@ const ItemListContainer = () => {
             justifyContent:'center',
             alignItems:'center'
         }}>
-            {loading && <CircularProgress />}
+            {loading && 
+            <Container sx={{display:'flex', justifyContent:'center', alignItems:'center', height:'100vh'}}>
+                <CircularProgress />
+            </Container>}
         </Container>
             <ItemList items={items}></ItemList>
         </>

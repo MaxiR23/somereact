@@ -15,11 +15,13 @@ import AdbIcon from '@mui/icons-material/Adb';
 import CardWidget from './CardWidget';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { CartContext } from '../../context/CartContext';
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const {user, logout} = React.useContext(AuthContext); 
+    const {clear} = React.useContext(CartContext);
     const navigate = useNavigate();
     let charUserName;
 
@@ -65,6 +67,7 @@ const ResponsiveAppBar = () => {
     
     const handleLogout = async () => {
         await logout()
+        clear()
         navigate('/')
     }
 

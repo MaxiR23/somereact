@@ -44,6 +44,7 @@ export default function Login() {
       navigate('/')
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
+        setEmailTypingError('E-mail no encontrado.')
         setError('Usuario no encontrado.')
       } else if (error.code === 'auth/invalid-email') {
         setEmailTypingError('E-mail invalido. Por favor introduzca un mail válido.')
