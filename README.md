@@ -8,7 +8,7 @@ Proyecto creado para la venta de celulares.
 
 ## Demo
 
-<img src="https://i.ibb.co/2hZBdmZ/presentation.gif"> 
+<img src="https://i.ibb.co/xF4pJw2/final-project.gif"> 
 
 ## Authors
 

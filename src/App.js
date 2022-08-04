@@ -20,7 +20,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
-          <NavBar></NavBar>
+          <NavBar/>
           <Routes>
             <Route path='/' element={<> <Banner /> <ItemListContainer /> </>}></Route>
             <Route path='/category/:idCategory' element={<ItemListContainer />}></Route>
@@ -32,7 +32,7 @@ function App() {
             <Route path='/register' element={<Register />}></Route>
             <Route path='/resetPassword' element={<ResetPassword />}></Route>
           </Routes>
-          <Footer></Footer>
+          <Footer/>
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>
