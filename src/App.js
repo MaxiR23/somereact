@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext';
 import Register from './components/Firebase/Register';
 import ProtectedRoute from './components/Firebase/ProtectedRoute';
 import ResetPassword from './components/Firebase/ResetPassword';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path='/register' element={<Register />}></Route>
             <Route path='/resetPassword' element={<ResetPassword />}></Route>
           </Routes>
+          <Footer></Footer>
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>

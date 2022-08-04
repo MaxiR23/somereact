@@ -1,87 +1,109 @@
 import * as React from 'react';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/system';
-import ItemCount from './ItemCount/ItemCount';
-import { Link } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import LockIcon from '@mui/icons-material/Lock';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import Grid from '@mui/material/Grid';
 import { CartContext } from '../../context/CartContext';
 import { useState } from 'react';
+import { Container } from '@mui/system';
+import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import ItemCount from './ItemCount/ItemCount';
 import './ItemDetail.css'
-import RelatedItems from '../RelatedItems/RelatedItems';
 
 const ItemDetail = ({ product }) => {
 
     const { addItem } = React.useContext(CartContext);
     const [showButton, setShowButton] = useState(true);
-    const [count, setCount] = useState(1) 
-    
+    let disabled = false;
+
+    if (product.stock < 1) {
+        disabled = true;
+    } else {
+        disabled = false;
+    }
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
     const onAdd = count => addItem(product, count);
 
     return <>
-        <Container sx={
-            {
-                marginTop: 2,
-                maxWidth: 850,
-                display: 'flex',
-                flexDirection: 'row',
-            }
-        }>
-            <CardMedia
-                sx={{
-                    width: 320
-                }}
-                component="img"
-                height="350"
-                width="290"
-                image={product.image}
-                alt={product.brand}
-            />
-            <Container sx={
-                {
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {product.brand} {product.model}
-                    </Typography>
-                    <Typography variant='body1' color="GrayText">
-                        {product.brand}
-                    </Typography>
-                    <Typography gutterBottom variant="h5" component="div" color={'#4caf50'}>
-                        ${product.price}
-                    </Typography>
-                    <Typography variant='caption' color={'#0077b6'}>
-                        Stock disponible: {product.stock}
-                    </Typography>
-                </CardContent>
-                <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    {showButton ? 
-                    <ItemCount count={count} setCount={setCount} stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} ></ItemCount>
+        <Container fixed sx={{ mt: 1 }}>
+            <Grid container spacing={1}>
+                <Grid item xs={12} md={8}>
+                    <Item>
+                        {product.idCategory === 'Zapatillas' ? 
+                        <img src={product.image} alt={product.model} width={'94%'} height={'auto'} />
                         :
-                        <Button size="small" >
-                            <Link to={'/cart'} style={{color:'#0077b6', textDecoration:'none'}}> Finalizar Compra </Link>
-                        </Button>
-                    }
-                </CardActions>
-            </Container>
-        </Container>
+                        <img src={product.image} alt={product.model} width={'75%'} height={'auto'} />
+                        }
+                    </Item>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Item sx={{ py: 2.4 }}>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {product.brand} {product.model}
+                        </Typography>
+                        <Typography variant='body1' color="GrayText">
+                            {product.brand}
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="div" color={'#4caf50'}>
+                            ${product.price}
+                        </Typography>
+                        {product.stock < 1 ?
+                            <Typography variant='caption' color={'#0077b6'}>
+                                Stock: No hay stock disponible
+                            </Typography>
+                            :
+                            <Typography variant='caption' color={'#0077b6'}>
+                                Stock disponible: {product.stock}
+                            </Typography>
+                        }
 
-        <Container sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignContent: 'center',
-            flexWrap: 'wrap',
-            gap: 2
-        }}>
-            <RelatedItems idCategory={product.idCategory} model={product.model} setCount={setCount} count={count}></RelatedItems>
+
+                        <Box sx={{ mt: 2 }}>
+                            <KeyboardReturnIcon />
+                            <Typography variant='h6'> Devolucion gratis </Typography>
+                            <Typography variant='caption'> Tenes 30 días desde que lo recibis </Typography>
+                        </Box>
+
+                        <Box sx={{ mt: 2 }}>
+                            <CheckroomIcon />
+                            <Typography variant='h6'> Calidad </Typography>
+                            <Typography variant='caption'> Te garantizamos calidad en cada una de nuestras prendas </Typography>
+                        </Box>
+
+                        <Box sx={{ mt: 2 }}>
+                            <LockIcon />
+                            <Typography variant='h6'> Compra protegida </Typography>
+                            <Typography variant='caption'> Recibis el producto que esperabas o te devolvemos tu dinero </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            {showButton ?
+                                <ItemCount initial={1} stock={product.stock} onAdd={onAdd} setShowButton={setShowButton} disabled={disabled} ></ItemCount>
+                                :
+                                <Button size="medium" sx={{mt:7}}>
+                                    <Link to={'/cart'} style={{ color: '#0077b6', textDecoration: 'none' }}> Finalizar Compra </Link>
+                                </Button>
+                            }
+                        </Box>
+
+                    </Item>
+                </Grid>
+            </Grid>
         </Container>
     </>
 }
 
 export default ItemDetail;
+

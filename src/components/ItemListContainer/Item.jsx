@@ -37,7 +37,11 @@ export default function Item({ item }) {
                 <Button size="small">
                     <Link to={`/item/${item.id}`} style={{color:'#0077b6', textDecoration:'none'}}> Ver detalle del producto </Link>
                 </Button>
+                {item.stock < 1 ? 
+                <Typography variant='caption'> Sin stock </Typography>
+                :
                 <Typography variant='caption'> Stock disponible: {item.stock} </Typography>
+                }
             </CardActions>
         </Card>
     );
