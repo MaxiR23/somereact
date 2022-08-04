@@ -17,9 +17,6 @@ const Cart = () => {
     
     const {cart, clear, removeItem, total} = React.useContext(CartContext);
     const navigate = useNavigate();
-    const TAX_RATE = 0.21;
-    const invoiceTaxes = TAX_RATE * total;
-    const invoiceTotal = invoiceTaxes + total;
 
     return (
         <Container fixed sx={{ mt: 2 }}>
@@ -57,21 +54,11 @@ const Cart = () => {
                         ))}
 
                         <TableRow>
-                            <TableCell rowSpan={3} />
-                            <TableCell colSpan={2}>Subtotal</TableCell>
+                            <TableCell colSpan={3}>Total</TableCell>
                             <TableCell align="right">{'$'+total}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell>Tax</TableCell>
-                            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                            <TableCell align="right">{'$'+invoiceTaxes}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell colSpan={2}>Total</TableCell>
-                            <TableCell align="right">{'$'+invoiceTotal}</TableCell>
-                        </TableRow>
                         <TableRow>   
-                            <TableCell colSpan={2}> </TableCell>   
+                            <TableCell colSpan={1}> </TableCell>   
                             <TableCell align='right'> <Button onClick={() => clear()}> Borrar todo </Button> </TableCell>   
                             <TableCell align='right'> <Button onClick={() => navigate('/checkout')}> Comprar </Button> </TableCell>   
                         </TableRow>

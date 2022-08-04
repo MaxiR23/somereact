@@ -52,6 +52,8 @@ export default function Login() {
       } else if (error.code === 'auth/wrong-password') {
         setPasswordTypingError('Contraseña incorrecta has olvidado tu contraseña?')
         setError('Contraseña invalida')
+      } else if (error.code === 'auth/too-many-requests') {
+        setError('Esta cuenta ha sido desabilitada temporalmente debido a muchos intentos de ingresos fallidos. Puedes recuperar la cuenta inmediatamente cambiando la contraseña o intente nuevamente mas tarde.')
       } else if (error.code === 'auth/internal-error') {
         console.warn('Error interno.', error.message)
       } else {

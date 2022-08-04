@@ -25,7 +25,7 @@ export default function ResetPassword() {
     if (!user.email) return setError('Ingrese un correo electrónico');
     try {
       await resetPassword(user.email);
-      setError('Revisa tu e-mail')
+      setError('Revisa tu correo electrónico')
       setTimeout(() => {
         setError('')
         navigate('/login')
