@@ -2,7 +2,7 @@
 
 Página dedicada a la venta de ropa. Especialmente ropa importada.
 
-![GIF](https://i.ibb.co/xF4pJw2/final-project.gif)
+![GIF-Project](https://media.giphy.com/media/OUO0vk15dzXIFLjwYm/giphy.gif)
 
 ## Tech Stack
 
