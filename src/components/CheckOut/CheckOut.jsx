@@ -16,9 +16,7 @@ export default function CheckOut() {
   const {user} = React.useContext(AuthContext);
   const {cart, clear, total} = React.useContext(CartContext)
 
-  console.log(user.displayName);
   const newDisplayName = user.displayName.split(' ')
-  console.log(typeof newDisplayName[0])
 
   const name = newDisplayName[0];
   const lastName = newDisplayName[1]

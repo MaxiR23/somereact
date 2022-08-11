@@ -33,6 +33,8 @@ export default function ResetPassword() {
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         setError('Usuario no encontrado')
+      } else if (error.code === 'auth/invalid-email') {
+        setError('Correo electrónico invalido. Intente nuevamente')
       } else {
         console.warn(error.message)
       }

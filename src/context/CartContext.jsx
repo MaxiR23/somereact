@@ -13,6 +13,9 @@ export const CartProvider = ({ children }) => {
         if (isInCart(item.id)) {
             let newCart = cart;
             let indexProduct = newCart.findIndex(element => element.id === item.id);
+            
+            if(newCart[indexProduct].quantity + quantity > item.stock) return alert("No hay mas stock disponible");
+            
             newCart[indexProduct].quantity = Number(newCart[indexProduct].quantity) + Number(quantity);
             setCart([...newCart]);
         } else {
