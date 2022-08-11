@@ -2,6 +2,8 @@
 
 Página dedicada a la venta de ropa. Especialmente ropa importada.
 
+![GIF](https://i.ibb.co/xF4pJw2/final-project.gif)
+
 ## Tech Stack
 
 **Client:** React, Material UI
@@ -11,7 +13,7 @@ Página dedicada a la venta de ropa. Especialmente ropa importada.
 ## Demo
 
 - [Demo proyecto](https://my-ecommerce-6cc8a.web.app/)
-- [GIF](https://i.ibb.co/xF4pJw2/final-project.gif)
+
 ## Authors
 
 - [@maxirebolo](https://github.com/MaxiR23)
