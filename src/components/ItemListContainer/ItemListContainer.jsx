@@ -10,7 +10,7 @@ const ItemListContainer = () => {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     let {idCategory} = useParams();
-    
+
     useEffect(() => {
 
         const db = getFirestore();

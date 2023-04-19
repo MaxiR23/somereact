@@ -5,15 +5,16 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Avatar, Box, CssBaseline, Grid, Typography } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 export default function Login() {
-  
+
   const [emailTypingError, setEmailTypingError] = React.useState();
   const [passwordTypingError, setPasswordTypingError] = React.useState();
-  
+
   const [error, setError] = React.useState();
-  const {login} = React.useContext(AuthContext);
+  const { login, loginWithGoogle } = React.useContext(AuthContext);
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -22,7 +23,7 @@ export default function Login() {
   })
 
   /* Actualiza el estado */                         /* copio todos los datos que tenga y voy a actualizar */
-  const handleChanges = ({target: {name, value}}) => setUser({...user, [name] : value});
+  const handleChanges = ({ target: { name, value } }) => setUser({ ...user, [name]: value });
   /* Para ver que es lo que tiene */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ export default function Login() {
       setEmailTypingError('')
       setPasswordTypingError('')
     }
-    
+
     setError('')
     try {
       await login(user.email, user.password);
@@ -62,9 +63,19 @@ export default function Login() {
     }
   }
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await loginWithGoogle()
+      navigate('/')
+    } catch (e) {
+      console.warn(e);
+      setError('No ha podido registrarse correctamente.' + e.message);
+    }
+  }
+
   return (
     <>
-    <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -84,78 +95,89 @@ export default function Login() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 {emailTypingError ?
-                <>
-                 <TextField
-                 required
-                 error
-                 fullWidth
-                 id="email"
-                 label="Correo Electrónico"
-                 name="email"
-                 autoComplete="email"
-                 onChange={handleChanges}
-               />
-               <Typography textAlign={'end'} style={{color:'red'}}> {emailTypingError} </Typography>
-                </>
-                 : 
-                 <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Correo electrónico"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChanges}
-                />
-                 }
+                  <>
+                    <TextField
+                      required
+                      error
+                      fullWidth
+                      id="email"
+                      label="Correo Electrónico"
+                      name="email"
+                      autoComplete="email"
+                      onChange={handleChanges}
+                    />
+                    <Typography textAlign={'end'} style={{ color: 'red' }}> {emailTypingError} </Typography>
+                  </>
+                  :
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Correo electrónico"
+                    name="email"
+                    autoComplete="email"
+                    onChange={handleChanges}
+                  />
+                }
               </Grid>
               <Grid item xs={12}>
                 {passwordTypingError ?
-                <>
-                <TextField
-                required
-                error
-                fullWidth
-                name="password"
-                label="Contraseña"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                onChange={handleChanges}
-              />
-              <Typography textAlign={'end'} style={{color:'red'}}> {passwordTypingError} </Typography>
-                </> 
-                :
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={handleChanges}
-                /> 
+                  <>
+                    <TextField
+                      required
+                      error
+                      fullWidth
+                      name="password"
+                      label="Contraseña"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                      onChange={handleChanges}
+                    />
+                    <Typography textAlign={'end'} style={{ color: 'red' }}> {passwordTypingError} </Typography>
+                  </>
+                  :
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Contraseña"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    onChange={handleChanges}
+                  />
                 }
               </Grid>
             </Grid>
-            {error && <Typography textAlign={'end'} style={{color:'red'}}> {error} </Typography>}
+            {error && <Typography textAlign={'end'} style={{ color: 'red' }}> {error} </Typography>}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3 }}
             >
               Ingresar
             </Button>
+            <Button
+              onClick={handleGoogleSignIn}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              style={{backgroundColor: '#e61919'}}
+            >
+              Ingresar con Google
+              <Box sx={{mx:0.5}}></Box>
+              <GoogleIcon/>
+            </Button>
             <Grid container rowSpacing={1} justifyContent="flex-end">
               <Grid item>
-                <Link to={'/register'} style={{color:'#757de8'}} variant="body2">
+                <Link to={'/register'} style={{ color: '#757de8' }} variant="body2">
                   Aún no tenes una cuenta? Registrate!
                 </Link>
               </Grid>
               <Grid item>
-              <Link to={'/resetpassword'} style={{color:'#757de8'}} variant="body2">
+                <Link to={'/resetpassword'} style={{ color: '#757de8' }} variant="body2">
                   Olvidaste tu contraseña?
                 </Link>
               </Grid>
@@ -163,7 +185,7 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
-      </>
+    </>
   )
 }
 

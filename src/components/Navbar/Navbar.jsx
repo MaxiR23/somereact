@@ -20,8 +20,8 @@ import { CartContext } from '../../context/CartContext';
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const {user, logout} = React.useContext(AuthContext); 
-    const {clear} = React.useContext(CartContext);
+    const { user, logout } = React.useContext(AuthContext);
+    const { clear } = React.useContext(CartContext);
     const navigate = useNavigate();
     let charUserName;
 
@@ -29,15 +29,15 @@ const ResponsiveAppBar = () => {
         {
             id: 1,
             title: 'Ingresar',
-            link: '/login', 
+            link: '/login',
         },
         {
             id: 2,
             title: 'Registrarse',
-            link: '/register', 
+            link: '/register',
         },
     ];
-    
+
     const pages = [
         {
             id: 1,
@@ -63,22 +63,26 @@ const ResponsiveAppBar = () => {
     const handleOpenUserMenu = event => setAnchorElUser(event.currentTarget);
 
     function handleCloseNavMenu() { setAnchorElNav(null) };
-    const handleCloseUserMenu = () => setAnchorElUser(null); 
-    
+    const handleCloseUserMenu = () => setAnchorElUser(null);
+
     const handleLogout = async () => {
-        await logout()
-        clear()
-        navigate('/')
+        try {
+            await logout()
+            clear()
+            navigate('/')
+        } catch (e) {
+            console.warn('Error en LogOut', e)
+        }
     }
 
-    user === null ? charUserName = ':)' : charUserName = user.email.charAt(0);    
-    
+    user === null ? charUserName = ':)' : charUserName = user.email.charAt(0);
+
     return (
         <AppBar position="static" style={{ backgroundColor: 'black' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Link to='/' style={{color:'white'}}>
-                    <CheckroomIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+                    <Link to='/' style={{ color: 'white' }}>
+                        <CheckroomIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     </Link>
                     <Typography
                         variant="h6"
@@ -135,8 +139,8 @@ const ResponsiveAppBar = () => {
                         </Menu>
                     </Box>
 
-                    <Link to='/' style={{color:'white'}}>
-                    <CheckroomIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <Link to='/' style={{ color: 'white' }}>
+                        <CheckroomIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     </Link>
                     <Typography
                         variant="h5"
@@ -199,17 +203,17 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {user === null ? 
-                            settings.map((setting, i) => (
-                                <MenuItem key={i} onClick={handleCloseUserMenu}>
-                                    <Link to={setting.link} style={{ color: 'black', textDecoration: 'none' }}>
-                                        <Typography textAlign="center">{setting.title}</Typography>
-                                    </Link>
+                            {user === null ?
+                                settings.map((setting, i) => (
+                                    <MenuItem key={i} onClick={handleCloseUserMenu}>
+                                        <Link to={setting.link} style={{ color: 'black', textDecoration: 'none' }}>
+                                            <Typography textAlign="center">{setting.title}</Typography>
+                                        </Link>
+                                    </MenuItem>
+                                )) :
+                                <MenuItem onClick={handleLogout}>
+                                    Cerrar Session
                                 </MenuItem>
-                            )) :
-                            <MenuItem onClick={handleLogout}>
-                                Cerrar Session 
-                            </MenuItem>
                             }
                         </Menu>
                     </Box>
