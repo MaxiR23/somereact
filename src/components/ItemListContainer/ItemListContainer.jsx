@@ -15,7 +15,7 @@ const ItemListContainer = () => {
 
         const db = getFirestore();
         const itemsRef = collection(db, 'items');
-        
+
         if (!idCategory) {
             getDocs(itemsRef).then((snapshot) => setItems(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()}))))
             .catch((err) => console.warn(err))
